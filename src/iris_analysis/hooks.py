@@ -39,6 +39,7 @@ from kedro.pipeline import Pipeline
 
 
 from .pipelines.data_engineering import pipeline as data_engineering
+from .pipelines.data_science import pipeline as data_science
 
 
 
@@ -54,8 +55,8 @@ class ProjectHooks:
         
         return {
             "data-engineering": data_engineering.create_pipeline(),
-           # "data-science": data_science.create_pipeline(),
-            "__default__": data_engineering.create_pipeline() #+ data_science.create_pipeline()
+            "data-science": data_science.create_pipeline(),
+            "__default__": data_engineering.create_pipeline() + data_science.create_pipeline()
         }
 
 

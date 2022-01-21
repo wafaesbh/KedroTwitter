@@ -1,32 +1,34 @@
 from kedro.pipeline import Pipeline,node
-from .Nodes.preprocess import limit_data_size 
-from .Nodes.preprocess import rename_columns 
-from .Nodes.preprocess import clean_data
+from .nodes.model import split_data
+from .nodes.model import vectorize_text 
+from .nodes.model import train_model
+from .nodes.model import evaluate_model
 
-def Process_pipeline():
+
+
+def create_pipeline(**kwargs):
+    
     return Pipeline(
         [
             node(
-                func = limit_data_size,
-                inputs = ["tripData" , "params:limit_size"],
-                # input = ["tripData" , "parametrs"],    parameters["limit_size"]
-                outputs="yellow_tripDataLimited",
-                name="limit_data_size"
+                split_data,
+                inputs=['processed_data', 'parameters'],
+                outputs=['X_train', 'X_test', 'y_train', 'y_test']
             ),
-             node(
-                func = rename_columns,
-                inputs = ["yellow_tripDataLimited"],
-                 #input = ["yellow_tripData" , "parametrs"],    parameters["limit_size"]
-                outputs="yellow_tripDataRenamed",
-                 name="rename_columns"
+            node(
+                vectorize_text,
+                inputs=['X_train', 'X_test', 'parameters'],
+                outputs=['X_train_vec', 'X_test_vec']
             ),
-              node(
-                func = clean_data,
-                inputs = ["yellow_tripData", "params:maxLat", "params:maxLong"],
-                # input = ["yellow_tripData" , "parametrs"],    parameters["limit_size"]
-                outputs="yellow_tripDataCleaned",
-                 name="clean_data"
-           ),
-
+            node(
+                train_model,
+                inputs=['X_train_vec', 'y_train', 'parameters'],
+                outputs='model'
+            ),
+            node(
+                evaluate_model,
+                inputs=['X_test_vec', 'y_test', 'model'],
+                outputs=None
+            )
         ]
     )
