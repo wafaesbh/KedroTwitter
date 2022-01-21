@@ -60,10 +60,12 @@ def _convert_emoticons(text: str) -> str:
     return text
     
 def _convert_links(text: str) -> str:
+    text = str(text)
     text = re.sub(r'(https?://\S+)|(www.\S+)', ' link ', text, flags = re.IGNORECASE)
     return text
     
 def _convert_usernames(text: str) -> str:
+    text = str(text)
     text = re.sub(r'@\S+', ' username ', text)
     return text
     
