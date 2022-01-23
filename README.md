@@ -1,10 +1,14 @@
-# projectKedro Twitter sentiment Analysis
+# Kedro project :  Twitter sentiment Analysis
 
-## Overview
+
 
 
 
 The dataset used in this project from [Twitter dataset](https://www.kaggle.com/kazanova/sentiment140).
+
+Kedro pipeline :
+![kedro-pipeline](https://user-images.githubusercontent.com/45363017/150680685-e8fcf75d-dd9b-4e13-97df-240e4af76997.png)
+
 
 ## Rules and guidelines
 
