@@ -1,10 +1,10 @@
-# projectKedro
+# projectKedro Twitter sentiment Analysis
 
 ## Overview
 
-This is your new Kedro project, which was generated using `Kedro 0.17.5`.
 
-Take a look at the [Kedro documentation](https://kedro.readthedocs.io) to get started.
+
+The dataset used in this project from [Twitter dataset](https://www.kaggle.com/kazanova/sentiment140).
 
 ## Rules and guidelines
 
